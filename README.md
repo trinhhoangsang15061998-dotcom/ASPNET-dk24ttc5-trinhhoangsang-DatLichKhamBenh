@@ -31,7 +31,7 @@
 | Vai trò | Email | Mật khẩu |
 |---------|-------|----------|
 | Bệnh nhân | test@gmail.com | 123456 |
-
+| Quản trị viên | an@hospital.com | 123456 |
 ## Chức năng hệ thống
 - ✅ Đăng ký / Đăng nhập bệnh nhân
 - ✅ Đặt lịch khám theo bác sĩ và chuyên khoa
