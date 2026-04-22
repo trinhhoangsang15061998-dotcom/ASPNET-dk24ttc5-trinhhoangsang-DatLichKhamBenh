@@ -8,63 +8,66 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-3">
             <div class="container">
                 <a class="navbar-brand text-primary fw-bold" href="/Default.aspx">🏥 DatLichKhamBenh</a>
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Default.aspx">🏠 Trang Chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/DatLich.aspx">📅 Đặt Lịch</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/QuanLyLich.aspx">⚙️ Quản Lý Lịch</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/QuanLyDatLich.aspx">📋 Quản Lý Hẹn</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/QuanLyBacSi.aspx">👨‍⚕️ Bác Sĩ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/QuanLyChuyenKhoa.aspx">🏥 Chuyên Khoa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Admin/ThongKe.aspx">📊 Thống Kê</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <asp:Panel ID="pnlDangNhap" runat="server">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/DangNhap.aspx">Đăng Nhập</a>
+                            <a class="nav-link" href="/Default.aspx">🏠 Trang Chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/DangKy.aspx">Đăng Ký</a>
+                            <a class="nav-link" href="/DatLich.aspx">📅 Đặt Lịch</a>
                         </li>
-                    </asp:Panel>
-                    <asp:Panel ID="pnlDaDangNhap" runat="server" Visible="false">
-                        <li class="nav-item">
-                            <asp:Label ID="lblHoTen" runat="server" CssClass="nav-link text-primary fw-bold" />
-                        </li>
-                        <li class="nav-item">
-                            <asp:LinkButton ID="btnDangXuat" runat="server" CssClass="nav-link text-danger"
-                                OnClick="btnDangXuat_Click">Đăng Xuất</asp:LinkButton>
-                        </li>
-                    </asp:Panel>
-                </ul>
+                        <asp:Panel ID="pnlAdmin" runat="server" Visible="false" CssClass="d-contents">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/QuanLyLich.aspx">⚙️ Quản Lý Lịch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/QuanLyDatLich.aspx">📋 Quản Lý Hẹn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/QuanLyBacSi.aspx">👨‍⚕️ Bác Sĩ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/QuanLyChuyenKhoa.aspx">🏥 Chuyên Khoa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/ThongKe.aspx">📊 Thống Kê</a>
+                            </li>
+                        </asp:Panel>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <asp:Panel ID="pnlDangNhap" runat="server" CssClass="d-contents">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/DangNhap.aspx">Đăng Nhập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/DangKy.aspx">Đăng Ký</a>
+                            </li>
+                        </asp:Panel>
+                        <asp:Panel ID="pnlDaDangNhap" runat="server" Visible="false" CssClass="d-contents">
+                            <li class="nav-item">
+                                <asp:Label ID="lblHoTen" runat="server" CssClass="nav-link text-primary fw-bold" />
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="btnDangXuat" runat="server" CssClass="nav-link text-danger"
+                                    OnClick="btnDangXuat_Click">Đăng Xuất</asp:LinkButton>
+                            </li>
+                        </asp:Panel>
+                    </ul>
+                </div>
             </div>
         </nav>
-
-        <!-- Nội dung trang -->
         <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
         </div>
-
         <footer class="border-top mt-4 py-3 text-center text-muted">
             &copy; 2026 - Hệ Thống Đặt Lịch Khám Bệnh
         </footer>
+        <style>
+            .d-contents { display: contents; }
+        </style>
     </form>
 </body>
 </html>

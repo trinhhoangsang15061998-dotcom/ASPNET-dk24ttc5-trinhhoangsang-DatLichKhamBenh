@@ -11,11 +11,14 @@ namespace DatLichKhamBenhWF
                 pnlDangNhap.Visible = false;
                 pnlDaDangNhap.Visible = true;
                 lblHoTen.Text = "👤 " + Session["HoTen"].ToString();
+                pnlAdmin.Visible = Session["VaiTro"] != null &&
+                                   Session["VaiTro"].ToString() == "Admin";
             }
             else
             {
                 pnlDangNhap.Visible = true;
                 pnlDaDangNhap.Visible = false;
+                pnlAdmin.Visible = false;
             }
         }
 

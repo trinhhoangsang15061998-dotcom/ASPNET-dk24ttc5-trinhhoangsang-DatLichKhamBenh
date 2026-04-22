@@ -9,6 +9,9 @@ namespace DatLichKhamBenhWF.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["VaiTro"] == null || Session["VaiTro"].ToString() != "Admin")
+                Response.Redirect("/DangNhap.aspx");
+
             if (!IsPostBack) LoadData();
         }
 
@@ -61,7 +64,6 @@ namespace DatLichKhamBenhWF.Admin
                     "SELECT MaLich FROM DatLich WHERE MaDL=@MaDL",
                     new SqlParameter[] { new SqlParameter("@MaDL", maDL) });
                 int maLich = Convert.ToInt32(dt.Rows[0]["MaLich"]);
-
                 DBHelper.ExecuteNonQuery(
                     "UPDATE DatLich SET TrangThai=N'Đã hủy' WHERE MaDL=@MaDL",
                     new SqlParameter[] { new SqlParameter("@MaDL", maDL) });

@@ -9,6 +9,9 @@ namespace DatLichKhamBenhWF.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["VaiTro"] == null || Session["VaiTro"].ToString() != "Admin")
+                Response.Redirect("/DangNhap.aspx");
+
             if (!IsPostBack)
             {
                 LoadChuyenKhoa();

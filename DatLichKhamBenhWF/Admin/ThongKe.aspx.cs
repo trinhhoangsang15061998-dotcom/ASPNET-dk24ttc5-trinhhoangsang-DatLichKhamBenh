@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 using DatLichKhamBenhWF.DAL;
 
 namespace DatLichKhamBenhWF.Admin
@@ -8,11 +9,13 @@ namespace DatLichKhamBenhWF.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["VaiTro"] == null || Session["VaiTro"].ToString() != "Admin")
+                Response.Redirect("/DangNhap.aspx");
+
             if (!IsPostBack)
             {
-                // Load dropdown tháng
                 for (int i = 1; i <= 12; i++)
-                    ddlThang.Items.Add(new System.Web.UI.WebControls.ListItem("Tháng " + i, i.ToString()));
+                    ddlThang.Items.Add(new ListItem("Tháng " + i, i.ToString()));
                 ddlThang.SelectedValue = DateTime.Now.Month.ToString();
                 txtNam.Text = DateTime.Now.Year.ToString();
                 LoadThongKe();
@@ -24,7 +27,6 @@ namespace DatLichKhamBenhWF.Admin
             int thang = Convert.ToInt32(ddlThang.SelectedValue);
             int nam = Convert.ToInt32(txtNam.Text);
 
-            // Tổng quan
             lblTong.Text = DBHelper.ExecuteQuery(
                 "SELECT COUNT(*) FROM DatLich WHERE MONTH(NgayDat)=@T AND YEAR(NgayDat)=@N",
                 new SqlParameter[] { new SqlParameter("@T", thang), new SqlParameter("@N", nam) })
@@ -45,7 +47,6 @@ namespace DatLichKhamBenhWF.Admin
                 new SqlParameter[] { new SqlParameter("@T", thang), new SqlParameter("@N", nam) })
                 .Rows[0][0].ToString();
 
-            // Thống kê theo bác sĩ
             string queryBS = @"SELECT b.HoTen AS TenBS, c.TenCK,
                 COUNT(*) AS TongSo,
                 SUM(CASE WHEN d.TrangThai=N'Đã xác nhận' THEN 1 ELSE 0 END) AS DaXacNhan,
@@ -60,7 +61,6 @@ namespace DatLichKhamBenhWF.Admin
                 new SqlParameter[] { new SqlParameter("@T", thang), new SqlParameter("@N", nam) });
             gvThongKeBS.DataBind();
 
-            // Thống kê theo chuyên khoa
             string queryCK = @"SELECT c.TenCK, COUNT(*) AS TongSo
                 FROM DatLich d
                 JOIN LichLamViec l ON d.MaLich = l.MaLich
